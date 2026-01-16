@@ -13,6 +13,10 @@ const CONFIG = {
     // 使用免費模型
     AI_MODEL: 'google/gemma-2-9b-it:free',
 
+    // Notion 設定 - 從 config.local.js 載入
+    NOTION_API_KEY: '',
+    NOTION_DATABASE_ID: '',
+
     // 應用設定
     APP_NAME: 'Typeless 會議',
     DEFAULT_FONT_SIZE: 28,

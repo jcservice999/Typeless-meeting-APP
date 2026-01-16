@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         toggleTranscript: document.getElementById('toggleTranscript'),
         regenerateBtn: document.getElementById('regenerateBtn'),
         downloadBtn: document.getElementById('downloadBtn'),
-        copyBtn: document.getElementById('copyBtn')
+        copyBtn: document.getElementById('copyBtn'),
+        saveToNotionBtn: document.getElementById('saveToNotionBtn')
     };
 
     // 取得會議 ID
@@ -265,6 +266,64 @@ async function saveSummary(summaryText) {
     }
 }
 
+// 儲存會議記錄到 Notion
+async function saveToNotion() {
+    const btn = elements.saveToNotionBtn;
+    const originalText = btn.innerHTML;
+
+    // 顯示載入狀態
+    btn.innerHTML = '<span>⏳</span> 儲存中...';
+    btn.disabled = true;
+
+    try {
+        // 準備會議資料
+        const title = meetingData?.title || '未命名會議';
+        const date = meetingData?.created_at ?
+            new Date(meetingData.created_at).toISOString().split('T')[0] :
+            new Date().toISOString().split('T')[0];
+        const summary = elements.aiSummary.innerText || '';
+
+        // 準備完整對話記錄
+        const transcriptText = transcripts.map(t => {
+            const time = Utils.formatTime(t.timestamp);
+            return `[${time}] ${t.speaker_name}：${t.content}`;
+        }).join('\n');
+
+        // 呼叫 Notion API
+        const result = await NotionAPI.saveMeetingToNotion({
+            title: title,
+            date: date,
+            summary: summary,
+            transcript: transcriptText
+        });
+
+        if (result.success) {
+            btn.innerHTML = '<span>✅</span> 已儲存到 Notion';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 3000);
+
+            // 如果有返回 URL，可以提供連結
+            if (result.data?.url) {
+                console.log('Notion 頁面連結:', result.data.url);
+            }
+        } else {
+            throw new Error(result.error || '儲存失敗');
+        }
+
+    } catch (err) {
+        console.error('儲存到 Notion 失敗:', err);
+        btn.innerHTML = '<span>❌</span> 儲存失敗';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }, 3000);
+
+        alert(`儲存到 Notion 失敗：${err.message}\n\n請確認 Notion API Key 和 Database ID 設定正確。`);
+    }
+}
+
 function setupEventListeners() {
     // 展開/收合完整記錄
     elements.toggleTranscript.addEventListener('click', () => {
@@ -294,6 +353,13 @@ function setupEventListeners() {
             }, 2000);
         }
     });
+
+    // 儲存到 Notion
+    if (elements.saveToNotionBtn) {
+        elements.saveToNotionBtn.addEventListener('click', async () => {
+            await saveToNotion();
+        });
+    }
 }
 
 function downloadMeetingRecord() {

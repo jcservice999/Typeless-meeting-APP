@@ -12,5 +12,10 @@ const LOCAL_CONFIG = {
 
     // OpenRouter 設定
     // 前往 https://openrouter.ai 取得
-    OPENROUTER_API_KEY: 'YOUR_OPENROUTER_API_KEY_HERE'
+    OPENROUTER_API_KEY: 'YOUR_OPENROUTER_API_KEY_HERE',
+
+    // Notion 設定
+    // 前往 https://www.notion.so/my-integrations 建立 Integration
+    NOTION_API_KEY: 'YOUR_NOTION_API_KEY_HERE',
+    NOTION_DATABASE_ID: 'YOUR_NOTION_DATABASE_ID_HERE'
 };
