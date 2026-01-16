@@ -3,17 +3,17 @@
 // ===================================
 
 const CONFIG = {
-    // Supabase 設定 - 從 config.local.js 載入
-    SUPABASE_URL: '',
-    SUPABASE_ANON_KEY: '',
+    // Supabase 設定（這些是公開的前端金鑰，可以安全地放在這裡）
+    SUPABASE_URL: 'https://ognyftdlwmuubwlvrmbz.supabase.co',
+    SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nbnlmdGRsd211dWJ3bHZybWJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg1NDc5ODEsImV4cCI6MjA4NDEyMzk4MX0.8OHUnfa7PNTQsBYW7bBUJxQUsNFZujCANa7mywgChG4',
 
-    // OpenRouter 設定 - 從 config.local.js 載入
+    // OpenRouter 設定 - 從 config.local.js 載入（這個需要保密）
     OPENROUTER_API_KEY: '',
     OPENROUTER_API_URL: 'https://openrouter.ai/api/v1/chat/completions',
     // 使用免費模型
     AI_MODEL: 'google/gemma-2-9b-it:free',
 
-    // Notion 設定 - 從 config.local.js 載入
+    // Notion 設定 - 已存在 Supabase Edge Function Secrets（不需要在前端）
     NOTION_API_KEY: '',
     NOTION_DATABASE_ID: '',
 
