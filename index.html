@@ -18,64 +18,84 @@
                 <span class="logo-icon">🎙️</span>
                 <h1>Typeless 會議</h1>
             </div>
-            <p class="tagline">即時字幕 · 語音通話 · AI 總結</p>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <img id="userAvatar" class="user-avatar" src="" alt="avatar">
+                <span id="userName" class="user-name"></span>
+                <button id="logoutBtn" class="btn btn-ghost btn-small">登出</button>
+            </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="card-container">
-                <!-- 建立會議 -->
-                <div class="card card-create">
-                    <div class="card-icon">🚀</div>
-                    <h2>建立新會議</h2>
-                    <p>建立一個會議室，邀請其他人加入</p>
+        <!-- 登入畫面 -->
+        <main class="login-section" id="loginSection">
+            <div class="login-card">
+                <div class="login-icon">🔐</div>
+                <h2>歡迎使用 Typeless 會議</h2>
+                <p>為聽障夥伴打造的無障礙會議系統</p>
+                <p class="login-hint">請使用 Google 帳號登入以開始使用</p>
+                <button id="googleLoginBtn" class="btn btn-google">
+                    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"
+                            fill="#4285F4" />
+                        <path
+                            d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"
+                            fill="#34A853" />
+                        <path
+                            d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"
+                            fill="#FBBC05" />
+                        <path
+                            d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"
+                            fill="#EA4335" />
+                    </svg>
+                    使用 Google 登入
+                </button>
+            </div>
+        </main>
+
+        <!-- 主要內容（登入後顯示） -->
+        <main class="main-content" id="mainContent" style="display: none;">
+            <div class="dashboard">
+                <!-- 左側：建立會議 -->
+                <section class="panel create-panel">
+                    <div class="panel-header">
+                        <span class="panel-icon">🚀</span>
+                        <h2>建立新會議</h2>
+                    </div>
                     <form id="createForm" class="form">
                         <div class="form-group">
-                            <label for="hostName">你的名稱</label>
-                            <input type="text" id="hostName" placeholder="輸入你的名稱" required>
+                            <label for="meetingTitle">會議主題</label>
+                            <input type="text" id="meetingTitle" placeholder="例：週會、專案討論" required>
                         </div>
                         <div class="form-group">
-                            <label for="meetingTitle">會議主題（選填）</label>
-                            <input type="text" id="meetingTitle" placeholder="例：週會、專案討論">
+                            <label for="allowedEmails">允許加入的 Email（每行一個）</label>
+                            <textarea id="allowedEmails" rows="4"
+                                placeholder="email1@gmail.com&#10;email2@gmail.com&#10;（留空表示所有人可加入）"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-full">
                             <span>建立會議</span>
                             <span class="btn-icon">→</span>
                         </button>
                     </form>
-                </div>
+                </section>
 
-                <!-- 分隔線 -->
-                <div class="divider">
-                    <span>或</span>
-                </div>
-
-                <!-- 加入會議 -->
-                <div class="card card-join">
-                    <div class="card-icon">🔗</div>
-                    <h2>加入會議</h2>
-                    <p>輸入房間代碼加入現有會議</p>
-                    <form id="joinForm" class="form">
-                        <div class="form-group">
-                            <label for="participantName">你的名稱</label>
-                            <input type="text" id="participantName" placeholder="輸入你的名稱" required>
+                <!-- 右側：會議室列表 -->
+                <section class="panel meetings-panel">
+                    <div class="panel-header">
+                        <span class="panel-icon">📋</span>
+                        <h2>會議室列表</h2>
+                    </div>
+                    <div id="meetingsList" class="meetings-list">
+                        <div class="loading-inline">
+                            <span class="loading-dots"></span>
+                            <span>載入中...</span>
                         </div>
-                        <div class="form-group">
-                            <label for="roomCode">房間代碼</label>
-                            <input type="text" id="roomCode" placeholder="輸入 6 位數代碼" maxlength="6"
-                                pattern="[A-Za-z0-9]{6}" required>
-                        </div>
-                        <button type="submit" class="btn btn-secondary">
-                            <span>加入會議</span>
-                            <span class="btn-icon">→</span>
-                        </button>
-                    </form>
-                </div>
+                    </div>
+                </section>
             </div>
         </main>
 
         <!-- Features -->
-        <section class="features">
+        <section class="features" id="featuresSection" style="display: none;">
             <div class="feature">
                 <span class="feature-icon">📝</span>
                 <h3>即時字幕</h3>
@@ -108,6 +128,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.local.js"></script>
     <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
 </body>
 

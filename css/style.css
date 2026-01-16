@@ -9,36 +9,38 @@
     --primary: #6366f1;
     --primary-hover: #818cf8;
     --primary-dark: #4f46e5;
-    
+
     /* 背景色 */
     --bg-primary: #0f0f1a;
     --bg-secondary: #1a1a2e;
     --bg-tertiary: #252542;
     --bg-card: #1e1e35;
-    
+
     /* 文字色 */
     --text-primary: #ffffff;
     --text-secondary: #a0a0b0;
     --text-muted: #6b6b7b;
-    
+
     /* 強調色 */
     --accent-green: #10b981;
     --accent-red: #ef4444;
     --accent-yellow: #f59e0b;
     --accent-blue: #3b82f6;
-    
+
     /* 其他 */
     --border-color: #2d2d4a;
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     --radius: 12px;
     --radius-sm: 8px;
-    
+
     /* 字體 */
     --font-main: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Reset & Base */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -458,6 +460,7 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -472,7 +475,8 @@ body {
 }
 
 .subtitle-text {
-    font-size: 28px; /* 預設大字體，方便聽障者閱讀 */
+    font-size: 28px;
+    /* 預設大字體，方便聽障者閱讀 */
     line-height: 1.4;
     color: var(--text-primary);
 }
@@ -749,6 +753,7 @@ body {
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -832,10 +837,24 @@ body {
 }
 
 @keyframes dots {
-    0%, 20% { content: ''; }
-    40% { content: '.'; }
-    60% { content: '..'; }
-    80%, 100% { content: '...'; }
+
+    0%,
+    20% {
+        content: '';
+    }
+
+    40% {
+        content: '.';
+    }
+
+    60% {
+        content: '..';
+    }
+
+    80%,
+    100% {
+        content: '...';
+    }
 }
 
 /* ===================================
@@ -954,11 +973,11 @@ body {
     .meeting-main {
         grid-template-columns: 1fr;
     }
-    
+
     .side-panel {
         flex-direction: row;
     }
-    
+
     .panel-section {
         flex: 1;
     }
@@ -968,38 +987,38 @@ body {
     .card-container {
         flex-direction: column;
     }
-    
+
     .divider {
         padding: 1rem 0;
     }
-    
+
     .card {
         max-width: 100%;
     }
-    
+
     .meeting-footer {
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .subtitle-input-section {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .subtitle-input-section label {
         text-align: center;
     }
-    
+
     .side-panel {
         flex-direction: column;
     }
-    
+
     .meeting-header {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-    
+
     .meeting-title-display {
         order: -1;
         width: 100%;
@@ -1011,16 +1030,256 @@ body {
     .app-container {
         padding: 1rem;
     }
-    
+
     .card {
         padding: 1.5rem;
     }
-    
+
     .features {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .subtitle-text {
         font-size: 22px;
+    }
+}
+
+/* ===================================
+   登入畫面樣式
+   =================================== */
+
+.login-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 3rem;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: var(--shadow);
+}
+
+.login-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-card p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.login-hint {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem !important;
+}
+
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 2rem;
+    background: white;
+    color: #333;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-google:hover {
+    background: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================
+   使用者資訊
+   =================================== */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+}
+
+.user-name {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* ===================================
+   儀表板（左右排版）
+   =================================== */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel-icon {
+    font-size: 1.5rem;
+}
+
+.panel-header h2 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Form 擴充 */
+.form-group textarea {
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: var(--font-main);
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* ===================================
+   會議室列表
+   =================================== */
+
+.meetings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.meeting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.meeting-item:hover {
+    border-color: var(--primary);
+    background: var(--bg-secondary);
+}
+
+.meeting-item-info {
+    flex: 1;
+}
+
+.meeting-item-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.meeting-item-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.meeting-item-code {
+    font-family: monospace;
+    color: var(--primary);
+}
+
+.empty-state,
+.error-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.empty-hint {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* ===================================
+   響應式 - 儀表板
+   =================================== */
+
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .login-card {
+        padding: 2rem;
+        margin: 1rem;
     }
 }
