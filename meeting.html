@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會議進行中 - Typeless 會議</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="meeting-page">
+    <div class="meeting-container">
+        <!-- 頂部控制列 -->
+        <header class="meeting-header">
+            <div class="meeting-info">
+                <span class="room-code-display">房間代碼：<strong id="roomCodeDisplay">------</strong></span>
+                <button id="copyRoomCode" class="btn-icon-only" title="複製房間代碼">📋</button>
+            </div>
+            <div class="meeting-title-display" id="meetingTitleDisplay">會議進行中</div>
+            <div class="meeting-actions">
+                <button id="endMeetingBtn" class="btn btn-danger">結束會議</button>
+            </div>
+        </header>
+
+        <!-- 主要內容區域 -->
+        <main class="meeting-main">
+            <!-- 字幕顯示區 -->
+            <section class="subtitle-section">
+                <div class="subtitle-header">
+                    <h2>📝 即時字幕</h2>
+                    <div class="subtitle-controls">
+                        <label>字體大小：</label>
+                        <input type="range" id="fontSizeSlider" min="18" max="48" value="28">
+                        <span id="fontSizeValue">28px</span>
+                    </div>
+                </div>
+                <div class="subtitle-display" id="subtitleDisplay">
+                    <div class="subtitle-placeholder">
+                        <p>等待字幕輸入...</p>
+                        <p class="subtitle-hint">使用 Typeless 講話，文字會即時顯示在這裡</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右側面板 -->
+            <aside class="side-panel">
+                <!-- 參與者列表 -->
+                <div class="panel-section participants-section">
+                    <h3>👥 參與者 (<span id="participantCount">0</span>)</h3>
+                    <ul id="participantList" class="participant-list">
+                        <!-- 動態生成 -->
+                    </ul>
+                </div>
+
+                <!-- 聊天區域 -->
+                <div class="panel-section chat-section">
+                    <h3>💬 聊天</h3>
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- 動態生成 -->
+                    </div>
+                    <form id="chatForm" class="chat-input-form">
+                        <input type="text" id="chatInput" placeholder="輸入訊息..." autocomplete="off">
+                        <button type="submit" class="btn-send">送出</button>
+                    </form>
+                </div>
+            </aside>
+        </main>
+
+        <!-- 底部控制區 -->
+        <footer class="meeting-footer">
+            <!-- 字幕輸入區（給 Typeless 用） -->
+            <div class="subtitle-input-section">
+                <label for="subtitleInput">✍️ 字幕輸入（將 Typeless 輸出到這裡）：</label>
+                <textarea id="subtitleInput" placeholder="讓 Typeless 將轉錄的文字輸入到這裡，所有人都會即時看到..." rows="2"></textarea>
+                <button id="sendSubtitleBtn" class="btn btn-primary">送出字幕</button>
+            </div>
+
+            <!-- 媒體控制 -->
+            <div class="media-controls">
+                <button id="micBtn" class="control-btn" title="開關麥克風">
+                    <span class="control-icon">🎤</span>
+                    <span class="control-label">麥克風</span>
+                </button>
+                <button id="speakerBtn" class="control-btn active" title="開關喇叭">
+                    <span class="control-icon">🔊</span>
+                    <span class="control-label">喇叭</span>
+                </button>
+            </div>
+        </footer>
+
+        <!-- 隱藏的音訊元素 -->
+        <div id="audioContainer" style="display: none;"></div>
+    </div>
+
+    <!-- 結束會議確認對話框 -->
+    <div id="endMeetingModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>結束會議</h2>
+            <p>確定要結束會議嗎？</p>
+            <div class="modal-actions">
+                <button id="generateSummaryBtn" class="btn btn-primary">結束並生成 AI 總結</button>
+                <button id="endWithoutSummaryBtn" class="btn btn-secondary">直接結束</button>
+                <button id="cancelEndBtn" class="btn btn-ghost">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 麥克風權限請求對話框 -->
+    <div id="permissionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">🎤</div>
+            <h2>需要麥克風權限</h2>
+            <p>為了讓其他參與者聽到你的聲音，請允許使用麥克風。</p>
+            <p class="modal-hint">如果你只想看字幕，也可以跳過此步驟。</p>
+            <div class="modal-actions">
+                <button id="requestMicBtn" class="btn btn-primary">允許使用麥克風</button>
+                <button id="skipMicBtn" class="btn btn-ghost">跳過（只看字幕）</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 載入中畫面 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>正在連接會議...</p>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- PeerJS for WebRTC -->
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script src="js/config.local.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/meeting.js"></script>
+</body>
+
+</html>

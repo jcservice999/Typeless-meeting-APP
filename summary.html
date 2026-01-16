@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會議總結 - Typeless 會議</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container summary-page">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🎙️</span>
+                <h1>Typeless 會議</h1>
+            </div>
+        </header>
+
+        <!-- Summary Content -->
+        <main class="summary-content">
+            <div class="summary-header">
+                <h1 id="meetingTitle">會議總結</h1>
+                <p class="meeting-meta">
+                    <span id="meetingDate">日期載入中...</span>
+                    <span class="separator">·</span>
+                    <span id="meetingDuration">時長載入中...</span>
+                </p>
+            </div>
+
+            <!-- AI 生成的總結 -->
+            <section class="summary-section">
+                <div class="section-header">
+                    <h2>🤖 AI 會議摘要</h2>
+                    <button id="regenerateBtn" class="btn btn-small">重新生成</button>
+                </div>
+                <div id="aiSummary" class="summary-box">
+                    <div class="loading-inline">
+                        <span class="loading-dots"></span>
+                        <span>AI 正在分析會議內容...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 待辦事項 -->
+            <section class="summary-section">
+                <h2>✅ 待辦事項</h2>
+                <div id="actionItems" class="action-items-box">
+                    <p class="placeholder">分析中...</p>
+                </div>
+            </section>
+
+            <!-- 完整對話記錄 -->
+            <section class="summary-section">
+                <div class="section-header">
+                    <h2>📝 完整對話記錄</h2>
+                    <button id="toggleTranscript" class="btn btn-small btn-ghost">展開</button>
+                </div>
+                <div id="fullTranscript" class="transcript-box collapsed">
+                    <p class="placeholder">載入中...</p>
+                </div>
+            </section>
+
+            <!-- 操作按鈕 -->
+            <div class="summary-actions">
+                <button id="downloadBtn" class="btn btn-primary">
+                    <span>📥</span> 下載會議記錄
+                </button>
+                <button id="copyBtn" class="btn btn-secondary">
+                    <span>📋</span> 複製摘要
+                </button>
+                <a href="index.html" class="btn btn-ghost">返回首頁</a>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>為聽障夥伴打造的無障礙會議系統 ❤️</p>
+        </footer>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.local.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/summary.js"></script>
+</body>
+
+</html>

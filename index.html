@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typeless 會議 - 即時轉錄與字幕</title>
+    <meta name="description" content="整合 Typeless 的線上會議系統，提供即時字幕與 AI 會議總結">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🎙️</span>
+                <h1>Typeless 會議</h1>
+            </div>
+            <p class="tagline">即時字幕 · 語音通話 · AI 總結</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="card-container">
+                <!-- 建立會議 -->
+                <div class="card card-create">
+                    <div class="card-icon">🚀</div>
+                    <h2>建立新會議</h2>
+                    <p>建立一個會議室，邀請其他人加入</p>
+                    <form id="createForm" class="form">
+                        <div class="form-group">
+                            <label for="hostName">你的名稱</label>
+                            <input type="text" id="hostName" placeholder="輸入你的名稱" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingTitle">會議主題（選填）</label>
+                            <input type="text" id="meetingTitle" placeholder="例：週會、專案討論">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>建立會議</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- 分隔線 -->
+                <div class="divider">
+                    <span>或</span>
+                </div>
+
+                <!-- 加入會議 -->
+                <div class="card card-join">
+                    <div class="card-icon">🔗</div>
+                    <h2>加入會議</h2>
+                    <p>輸入房間代碼加入現有會議</p>
+                    <form id="joinForm" class="form">
+                        <div class="form-group">
+                            <label for="participantName">你的名稱</label>
+                            <input type="text" id="participantName" placeholder="輸入你的名稱" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="roomCode">房間代碼</label>
+                            <input type="text" id="roomCode" placeholder="輸入 6 位數代碼" maxlength="6"
+                                pattern="[A-Za-z0-9]{6}" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">
+                            <span>加入會議</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature">
+                <span class="feature-icon">📝</span>
+                <h3>即時字幕</h3>
+                <p>Typeless 轉錄即時顯示給所有人</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🎧</span>
+                <h3>語音通話</h3>
+                <p>所有人可聽到彼此的聲音</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">💬</span>
+                <h3>文字聊天</h3>
+                <p>自由打字交流</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🤖</span>
+                <h3>AI 總結</h3>
+                <p>會議結束自動生成摘要</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>為聽障夥伴打造的無障礙會議系統 ❤️</p>
+        </footer>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.local.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
